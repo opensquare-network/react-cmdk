@@ -3,6 +3,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "dist"
+  ],
   "version": "1.0.0",
   "description": "A fast, accessible, and pretty React.js command palette",
   "homepage": "https://react-cmdk.com",
