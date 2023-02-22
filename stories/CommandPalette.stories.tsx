@@ -21,6 +21,7 @@ const Template: Story<any> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const [search, setSearch] = useState<string>("");
   const [page, setPage] = useState<"root" | "positions">("root");
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   useHandleOpenCommandPalette(setIsOpen);
 
@@ -56,6 +57,16 @@ const Template: Story<any> = () => {
           icon: "CogIcon",
           id: "settings",
           disabled: true,
+        },
+        {
+          children: "Toggle Theme",
+          icon: "SquaresPlusIcon",
+          closeOnSelect: false,
+          keywords: ["theme", "light", "dark"],
+          id: "theme",
+          onClick: () => {
+            setTheme(theme === "dark" ? "light" : "dark");
+          },
         },
         {
           children: "Positions",
@@ -134,6 +145,7 @@ const Template: Story<any> = () => {
       }}
     >
       <CommandPalette
+        theme={theme}
         onChangeSelected={setSelected}
         onChangeSearch={setSearch}
         onChangeOpen={setIsOpen}
