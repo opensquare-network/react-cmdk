@@ -1,4 +1,4 @@
-import { RenderLink } from "../types";
+import { RenderLink, Theme } from "../types";
 import { createContext, Dispatch, SetStateAction } from "react";
 
 export const SelectContext = createContext<{ selected: number }>({
@@ -30,4 +30,8 @@ export const OpenContext = createContext<{
 }>({
   onChangeOpen: () => undefined,
   isOpen: false,
+});
+
+export const ThemeContext = createContext<{ theme: Theme }>({
+  theme: "light",
 });

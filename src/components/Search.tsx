@@ -1,6 +1,8 @@
 import React, { forwardRef, Fragment, Ref } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { XCircleIcon } from "@heroicons/react/24/solid";
+import { useIsDark } from "../lib/utils";
+import clsx from "clsx";
 
 interface SearchProps {
   onChange: (value: string) => void;
@@ -13,15 +15,22 @@ function Search(
   { onChange, placeholder, prefix, value }: SearchProps,
   ref: Ref<HTMLInputElement>
 ) {
+  const isDark = useIsDark();
+
   return (
     <div className="flex items-center space-x-1.5 pl-3">
-      <MagnifyingGlassIcon className="w-4 pointer-events-none text-gray-400 dark:text-gray-600" />
+      <MagnifyingGlassIcon
+        className={clsx(
+          "w-4 pointer-events-none text-gray-400",
+          isDark && "text-gray-600"
+        )}
+      />
 
       {prefix?.length
         ? prefix.map((p) => {
             return (
               <Fragment key={p}>
-                <span className="dark:text-white">{p}</span>
+                <span className={clsx(isDark && "text-white")}>{p}</span>
                 <span className="text-gray-500">/</span>
               </Fragment>
             );
@@ -33,7 +42,10 @@ function Search(
           ref={ref}
           spellCheck={false}
           autoComplete="off"
-          className="py-4 px-0 border-none w-full focus:outline-none focus:border-none focus:ring-0 bg-transparent placeholder-gray-500 dark:text-white"
+          className={clsx(
+            "py-4 px-0 border-none w-full focus:outline-none focus:border-none focus:ring-0 bg-transparent placeholder-gray-500",
+            isDark && "text-white"
+          )}
           onChange={(e) => {
             onChange(e.currentTarget.value);
           }}
@@ -68,7 +80,12 @@ function Search(
               }
             }}
           >
-            <XCircleIcon className="w-5 text-gray-300 dark:text-gray-600 hover:text-gray-500 dark:hover:text-gray-300 transition absolute right-3 top-1/2 transform -translate-y-1/2" />
+            <XCircleIcon
+              className={clsx(
+                "w-5 text-gray-300 hover:text-gray-500 transition absolute right-3 top-1/2 transform -translate-y-1/2",
+                isDark && "text-gray-600 hover:text-gray-300"
+              )}
+            />
           </button>
         )}
       </div>

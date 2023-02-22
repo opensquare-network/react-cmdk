@@ -10,15 +10,23 @@ import React, {
 } from "react";
 import { IconName, RenderLink } from "../types";
 import { OpenContext, RenderLinkContext, SelectContext } from "../lib/context";
-import { classNames } from "../lib/utils";
+import { useIsDark } from "../lib/utils";
+import clsx from "clsx";
 
 export type ListItemType = "Link" | "Action";
 
-function getListItemWrapperStyles(selected: boolean, disabled?: boolean) {
-  return classNames(
-    "command-palette-list-item block w-full text-left px-3.5 py-2.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 focus:ring-1 focus:ring-gray-300 focus:outline-none flex items-center space-x-2.5 justify-between",
+function getListItemWrapperStyles(
+  selected: boolean,
+  disabled: boolean,
+  isDark: boolean
+) {
+  return clsx(
+    [
+      "command-palette-list-item block w-full text-left px-3.5 py-2.5 rounded-md hover:bg-gray-100 focus:ring-1 focus:ring-gray-300 focus:outline-none flex items-center space-x-2.5 justify-between",
+      isDark && "hover:bg-gray-800",
+    ],
     selected && !disabled
-      ? "bg-gray-200/50 dark:bg-gray-800"
+      ? ["bg-gray-200/50", isDark && "bg-gray-800"]
       : "bg-transparent",
     disabled
       ? "cursor-default pointer-events-none opacity-50"
@@ -61,6 +69,7 @@ export function Link({
   const { renderLink: globalRenderLink } = useContext(RenderLinkContext);
   const { onChangeOpen } = useContext(OpenContext);
   const { selected } = useContext(SelectContext);
+  const isDark = useIsDark();
 
   const renderLink = localRenderLink || globalRenderLink;
 
@@ -76,8 +85,8 @@ export function Link({
     );
   }
 
-  const styles = classNames(
-    getListItemWrapperStyles(selected === index, disabled),
+  const styles = clsx(
+    getListItemWrapperStyles(selected === index, disabled, isDark),
     className
   );
 
@@ -137,6 +146,7 @@ export function Button({
 }: ButtonProps) {
   const { selected } = useContext(SelectContext);
   const { onChangeOpen } = useContext(OpenContext);
+  const isDark = useIsDark();
 
   function clickAndClose(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     if (onClick) {
@@ -154,8 +164,8 @@ export function Button({
       aria-disabled={rest.disabled ?? false}
       data-close-on-select={closeOnSelect}
       onClick={clickAndClose}
-      className={classNames(
-        getListItemWrapperStyles(selected === index, rest.disabled),
+      className={clsx(
+        getListItemWrapperStyles(selected === index, !!rest.disabled, isDark),
         className
       )}
     >
@@ -183,6 +193,8 @@ function ListItemContent({
   children,
   type,
 }: ListItemContentProps) {
+  const isDark = useIsDark();
+
   return (
     <>
       <div className="flex w-full items-center space-x-2.5">
@@ -194,7 +206,9 @@ function ListItemContent({
           ))}
 
         {typeof children === "string" ? (
-          <span className="truncate max-w-md dark:text-white">{children}</span>
+          <span className={clsx("truncate max-w-md", isDark && "text-white")}>
+            {children}
+          </span>
         ) : (
           children
         )}

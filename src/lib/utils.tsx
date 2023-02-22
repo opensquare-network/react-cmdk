@@ -1,7 +1,8 @@
 import CommandPalette from "../components/CommandPalette";
-import React, { Dispatch, SetStateAction, useEffect } from "react";
+import React, { Dispatch, SetStateAction, useContext, useEffect } from "react";
 import { Children, ReactNode } from "react";
 import { JsonStructure } from "../types";
+import { ThemeContext } from "./context";
 
 export function getItemIndex(
   items: JsonStructure,
@@ -86,12 +87,6 @@ function getLabelFromChildren(children: ReactNode) {
   return label;
 }
 
-export function classNames(
-  ...classes: Array<string | null | boolean | undefined>
-) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export function renderJsonStructure(jsonStructure: JsonStructure) {
   return jsonStructure.map((list) => (
     <CommandPalette.List heading={list.heading} key={list.id}>
@@ -132,4 +127,9 @@ export function useHandleOpenCommandPalette(
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+}
+
+export function useIsDark() {
+  const { theme } = useContext(ThemeContext);
+  return theme === "dark";
 }

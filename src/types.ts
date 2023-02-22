@@ -313,3 +313,5 @@ export type RenderLink = (
     HTMLAnchorElement
   > & { "data-close-on-select"?: boolean }
 ) => ReactNode;
+
+export type Theme = "light" | "dark";
