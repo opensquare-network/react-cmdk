@@ -1,6 +1,8 @@
 import ListItem, { ButtonProps, LinkProps } from "./ListItem";
 import React, { useContext } from "react";
 import { SearchContext } from "../lib/context";
+import { useIsDark } from "../lib/utils";
+import clsx from "clsx";
 
 interface FreeSearchActionProps extends Omit<ButtonProps & LinkProps, "index"> {
   index?: number;
@@ -12,10 +14,11 @@ export default function FreeSearchAction({
   ...props
 }: FreeSearchActionProps) {
   const { search } = useContext(SearchContext);
+  const isDark = useIsDark();
 
   return (
     <ListItem index={0} icon="MagnifyingGlassIcon" showType={false} {...props}>
-      <span className="max-w-md truncate dark:text-white">
+      <span className={clsx("max-w-md truncate", isDark && "text-white")}>
         {label} <span className="font-semibold">"{search}"</span>
       </span>
     </ListItem>
