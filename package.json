@@ -24,7 +24,8 @@
     "type-check": "tsc -b -v --noEmit",
     "format": "prettier --write .",
     "build:types": "tsc -b -v",
-    "chromatic": "chromatic"
+    "chromatic": "chromatic",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",
