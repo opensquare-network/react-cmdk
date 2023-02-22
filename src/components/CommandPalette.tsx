@@ -140,7 +140,6 @@ function CommandPalette({
 
   return (
     <div
-      className={className}
       onKeyDown={(e) => {
         if (
           e.key === "ArrowDown" ||
@@ -170,7 +169,7 @@ function CommandPalette({
           <Dialog
             initialFocus={inputRef}
             as="div"
-            className="command-palette"
+            className={clsx("command-palette", className)}
             onClose={() => {
               onChangeOpen(false);
             }}
