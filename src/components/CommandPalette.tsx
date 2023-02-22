@@ -200,6 +200,7 @@ function CommandPalette({
                   >
                     <Dialog.Panel
                       className={clsx(
+                        "command-palette-content-panel",
                         "w-full max-h-full shadow-lg rounded-lg max-w-xl flex flex-col overflow-hidden divide-y",
                         isDark ? "bg-gray-900 divide-gray-800" : "bg-white"
                       )}
