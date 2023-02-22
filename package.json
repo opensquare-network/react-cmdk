@@ -63,7 +63,8 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.6.4",
-    "@heroicons/react": "^2.0.13"
+    "@heroicons/react": "^2.0.13",
+    "clsx": "^1.2.1"
   },
   "peerDependencies": {
     "react": "^16.x || ^17.x || ^18.x",
