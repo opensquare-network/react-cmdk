@@ -32,6 +32,7 @@ function Search(
         <input
           ref={ref}
           spellCheck={false}
+          autoComplete="off"
           className="py-4 px-0 border-none w-full focus:outline-none focus:border-none focus:ring-0 bg-transparent placeholder-gray-500 dark:text-white"
           onChange={(e) => {
             onChange(e.currentTarget.value);
