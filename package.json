@@ -19,7 +19,7 @@
     "build-tailwind": "NODE_ENV=production npx tailwindcss -i tailwind.css -o ./dist/cmdk.css --postcss --minify",
     "type-check:watch": "npm run type-check --watch",
     "test": "npm run check:format",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006 --no-open",
     "build-storybook": "build-storybook",
     "type-check": "tsc -b -v --noEmit",
     "format": "prettier --write .",
