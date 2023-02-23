@@ -4,7 +4,6 @@ import List from "./List";
 import ListItem from "./ListItem";
 import Page from "./Page";
 import React, {
-  Fragment,
   HTMLAttributes,
   ReactNode,
   useEffect,
@@ -21,7 +20,7 @@ import {
   ThemeContext,
 } from "../lib/context";
 import { RenderLink, Theme } from "../types";
-import { Transition, Dialog } from "@headlessui/react";
+import { Dialog } from "@headlessui/react";
 import clsx from "clsx";
 
 interface CommandPaletteProps {
@@ -165,91 +164,68 @@ function CommandPalette({
       }}
     >
       <ThemeContext.Provider value={{ theme }}>
-        <Transition appear show={isOpen} as={Fragment}>
-          <Dialog
-            initialFocus={inputRef}
-            as="div"
-            className={clsx("command-palette", className)}
-            onClose={() => {
-              onChangeOpen(false);
-            }}
-          >
-            <div className="command-palette-content antialiased">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-              >
-                <div className="fixed inset-0 bg-gray-900 bg-opacity-80" />
-              </Transition.Child>
+        <Dialog
+          open={isOpen}
+          initialFocus={inputRef}
+          as="div"
+          className={clsx("command-palette", className)}
+          onClose={() => {
+            onChangeOpen(false);
+          }}
+        >
+          <div className="command-palette-content antialiased">
+            <div className="fixed inset-0 bg-gray-900 bg-opacity-80" />
 
-              <div className="fixed inset-0 overflow-y-auto flex items-center justify-center">
-                <div className="flex w-full h-[450px] items-start justify-center p-4">
-                  <Transition.Child
-                    as={Fragment}
-                    enter="ease-out duration-300"
-                    enterFrom="opacity-0 scale-95"
-                    enterTo="opacity-100 scale-100"
-                    leave="ease-in duration-200"
-                    leaveFrom="opacity-100 scale-100"
-                    leaveTo="opacity-0 scale-95"
+            <div className="fixed inset-0 overflow-y-auto flex items-center justify-center">
+              <div className="flex w-full h-[450px] items-start justify-center p-4">
+                <Dialog.Panel
+                  className={clsx(
+                    "command-palette-content-panel",
+                    "w-full max-h-full shadow-lg rounded-lg max-w-xl flex flex-col overflow-hidden divide-y",
+                    isDark ? "bg-gray-900 divide-gray-800" : "bg-white"
+                  )}
+                >
+                  <PageContext.Provider
+                    value={{
+                      setSearchPrefix,
+                      searchPrefix,
+                      page,
+                    }}
                   >
-                    <Dialog.Panel
-                      className={clsx(
-                        "command-palette-content-panel",
-                        "w-full max-h-full shadow-lg rounded-lg max-w-xl flex flex-col overflow-hidden divide-y",
-                        isDark ? "bg-gray-900 divide-gray-800" : "bg-white"
-                      )}
-                    >
+                    <Search
+                      onChange={onChangeSearch}
+                      placeholder={placeholder}
+                      prefix={searchPrefix}
+                      value={search}
+                      ref={inputRef}
+                    />
+                  </PageContext.Provider>
+
+                  <div
+                    className="flex-1 overflow-y-auto focus:outline-none p-2 space-y-4"
+                    tabIndex={-1}
+                  >
+                    <OpenContext.Provider value={{ isOpen, onChangeOpen }}>
                       <PageContext.Provider
-                        value={{
-                          setSearchPrefix,
-                          searchPrefix,
-                          page,
-                        }}
+                        value={{ page, searchPrefix, setSearchPrefix }}
                       >
-                        <Search
-                          onChange={onChangeSearch}
-                          placeholder={placeholder}
-                          prefix={searchPrefix}
-                          value={search}
-                          ref={inputRef}
-                        />
+                        <SearchContext.Provider value={{ search }}>
+                          <SelectContext.Provider value={{ selected }}>
+                            <RenderLinkContext.Provider value={{ renderLink }}>
+                              {children}
+                            </RenderLinkContext.Provider>
+                          </SelectContext.Provider>
+                        </SearchContext.Provider>
                       </PageContext.Provider>
+                    </OpenContext.Provider>
+                  </div>
 
-                      <div
-                        className="flex-1 overflow-y-auto focus:outline-none p-2 space-y-4"
-                        tabIndex={-1}
-                      >
-                        <OpenContext.Provider value={{ isOpen, onChangeOpen }}>
-                          <PageContext.Provider
-                            value={{ page, searchPrefix, setSearchPrefix }}
-                          >
-                            <SearchContext.Provider value={{ search }}>
-                              <SelectContext.Provider value={{ selected }}>
-                                <RenderLinkContext.Provider
-                                  value={{ renderLink }}
-                                >
-                                  {children}
-                                </RenderLinkContext.Provider>
-                              </SelectContext.Provider>
-                            </SearchContext.Provider>
-                          </PageContext.Provider>
-                        </OpenContext.Provider>
-                      </div>
-
-                      {footer}
-                    </Dialog.Panel>
-                  </Transition.Child>
-                </div>
+                  {footer}
+                </Dialog.Panel>
               </div>
             </div>
-          </Dialog>
-        </Transition>
+          </div>
+        </Dialog>
       </ThemeContext.Provider>
     </div>
   );
