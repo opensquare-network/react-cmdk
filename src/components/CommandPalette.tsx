@@ -135,6 +135,7 @@ function CommandPalette({
 
   useEffect(() => {
     setSelected(0);
+    inputRef.current?.focus?.();
   }, [page]);
 
   return (
