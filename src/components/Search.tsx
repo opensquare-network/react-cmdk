@@ -1,6 +1,6 @@
 import React, { forwardRef, Fragment, Ref } from "react";
 import SystemSearch from "@osn/icons/subsquare/SystemSearch";
-import SystemClose from "@osn/icons/subsquare/SystemClose";
+import SystemClear from "@osn/icons/subsquare/SystemClear";
 import { useIsDark } from "../lib/utils";
 import clsx from "clsx";
 
@@ -80,7 +80,7 @@ function Search(
               }
             }}
           >
-            <SystemClose
+            <SystemClear
               className={clsx(
                 "w-5 text-gray-300 hover:text-gray-500 transition absolute right-3 top-1/2 transform -translate-y-1/2",
                 isDark && "text-gray-600 hover:text-gray-300"
