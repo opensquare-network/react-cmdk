@@ -46,7 +46,6 @@ const Template: Story<any> = () => {
       items: [
         {
           children: "Home",
-          icon: "HomeIcon",
           id: "home",
           disabled: true,
           href: "#",
@@ -54,13 +53,11 @@ const Template: Story<any> = () => {
         },
         {
           children: "Settings",
-          icon: "CogIcon",
           id: "settings",
           disabled: true,
         },
         {
           children: "Toggle Theme",
-          icon: "SquaresPlusIcon",
           closeOnSelect: false,
           keywords: ["theme", "light", "dark"],
           id: "theme",
@@ -70,7 +67,6 @@ const Template: Story<any> = () => {
         },
         {
           children: "Positions",
-          icon: "BriefcaseIcon",
           closeOnSelect: false,
           keywords: ["jobs"],
           id: "positions",
@@ -81,7 +77,6 @@ const Template: Story<any> = () => {
         },
         {
           children: "Candidates",
-          icon: "UsersIcon",
           id: "users",
           onClick: () => {
             alert("hj");
@@ -96,7 +91,6 @@ const Template: Story<any> = () => {
         {
           href: "https://google.com",
           children: "Help",
-          icon: "LifebuoyIcon",
           id: "support",
           target: "_blank",
           rel: "noopener noreferrer",
@@ -109,22 +103,18 @@ const Template: Story<any> = () => {
       items: [
         {
           children: "Privacy policy",
-          icon: "FlagIcon",
           id: "privacy",
         },
         {
           children: "User agreement",
-          icon: "UserIcon",
           id: "user-agreement",
         },
         {
           children: "About",
-          icon: "EyeIcon",
           id: "about",
         },
         {
           children: "Career",
-          icon: "UsersIcon",
           id: "career",
         },
       ],

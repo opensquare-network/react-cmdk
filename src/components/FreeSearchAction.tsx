@@ -17,7 +17,7 @@ export default function FreeSearchAction({
   const isDark = useIsDark();
 
   return (
-    <ListItem index={0} icon="MagnifyingGlassIcon" showType={false} {...props}>
+    <ListItem index={0} showType={false} {...props}>
       <span className={clsx("max-w-md truncate", isDark && "text-white")}>
         {label} <span className="font-semibold">"{search}"</span>
       </span>

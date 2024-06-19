@@ -29,13 +29,13 @@ Watch the [YouTube demo](https://www.youtube.com/watch?v=FN8noNclyoU) or [try it
 ## Installation
 
 ```
-npm install react-cmdk
+npm install @osn/icons react-cmdk
 ```
 
 Or if you'd rather use Yarn
 
 ```
-yarn add react-cmdk
+yarn add @osn/icons react-cmdk
 ```
 
 ## Example usage
@@ -63,19 +63,16 @@ const Example = () => {
           {
             id: "home",
             children: "Home",
-            icon: "HomeIcon",
             href: "#",
           },
           {
             id: "settings",
             children: "Settings",
-            icon: "CogIcon",
             href: "#",
           },
           {
             id: "projects",
             children: "Projects",
-            icon: "RectangleStackIcon",
             closeOnSelect: false,
             onClick: () => {
               setPage("projects");
@@ -90,19 +87,16 @@ const Example = () => {
           {
             id: "developer-settings",
             children: "Developer settings",
-            icon: "CodeBracketIcon",
             href: "#",
           },
           {
             id: "privacy-policy",
             children: "Privacy policy",
-            icon: "LifebuoyIcon",
             href: "#",
           },
           {
             id: "log-out",
             children: "Log out",
-            icon: "LogoutIcon",
             onClick: () => {
               alert("Logging out...");
             },
@@ -225,15 +219,14 @@ FYI. Using pages is completely optional
 
 ### `CommandPalette.ListItem`
 
-| name          | type                 | required | default    | description                                     |
-| ------------- | -------------------- | -------- | ---------- | ----------------------------------------------- |
-| index         | number               | true     |            | Index for list item                             |
-| closeOnSelect | boolean              | false    |            | Whether to close the command palette upon click |
-| icon          | (IconName, React.FC) | false    | `false`    | Icon for list item                              |
-| iconType      | IconType             | false    | `"solid" ` | Icon for list item                              |
-| showType      | boolean              | false    | true       | Whether to show the item type                   |
-| disabled      | boolean              | false    |            | Whether the item is disabled                    |
-| keywords      | Array<string>        | false    |            | Underlying search keywords for the list item    |
+| name          | type          | required | default | description                                     |
+| ------------- | ------------- | -------- | ------- | ----------------------------------------------- |
+| index         | number        | true     |         | Index for list item                             |
+| closeOnSelect | boolean       | false    |         | Whether to close the command palette upon click |
+| icon          | (React.FC)    | false    | `false` | Icon for list item                              |
+| showType      | boolean       | false    | true    | Whether to show the item type                   |
+| disabled      | boolean       | false    |         | Whether the item is disabled                    |
+| keywords      | Array<string> | false    |         | Underlying search keywords for the list item    |
 
 The list item also extends the `HTMLAnchorElement & HTMLButtonElement` types
 
