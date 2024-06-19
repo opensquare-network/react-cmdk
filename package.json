@@ -1,5 +1,6 @@
 {
   "name": "@osn/react-cmdk",
+  "type": "module",
   "publishConfig": {
     "access": "public"
   },
@@ -13,26 +14,18 @@
   "repository": "https://github.com/opensquare-network/react-cmdk",
   "license": "MIT",
   "scripts": {
-    "build": "npm run build:types && npm run build:js && npm run build-tailwind",
-    "build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline",
-    "check:format": "prettier --list-different \"./**/*.{ts,tsx,js,json,md}\"",
+    "build": "npm run build-js && npm run build-tailwind",
+    "build-js": "tsup",
+    "check-format": "prettier --list-different \"./**/*.{ts,tsx,js,json,md}\"",
     "build-tailwind": "NODE_ENV=production npx tailwindcss -i tailwind.css -o ./dist/cmdk.css --postcss --minify",
-    "type-check:watch": "npm run type-check --watch",
-    "test": "npm run check:format",
+    "test": "npm run check-format",
     "storybook": "start-storybook -p 6006 --no-open",
     "build-storybook": "build-storybook",
-    "type-check": "tsc -b -v --noEmit",
     "format": "prettier --write .",
-    "build:types": "tsc -b -v",
     "chromatic": "chromatic",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@babel/cli": "^7.17.10",
-    "@babel/core": "^7.18.2",
-    "@babel/preset-env": "^7.18.2",
-    "@babel/preset-react": "^7.17.12",
-    "@babel/preset-typescript": "^7.17.12",
     "@osn/icons": "^1.107.0",
     "@storybook/addon-actions": "^6.5.16",
     "@storybook/addon-essentials": "^6.5.16",
@@ -46,7 +39,6 @@
     "@types/react-outside-click-handler": "^1.3.1",
     "@types/webpack": "^5.28.0",
     "autoprefixer": "^10.4.7",
-    "babel-loader": "^8.2.5",
     "fork-ts-checker-webpack-plugin": "^7.2.11",
     "html-webpack-plugin": "^5.5.0",
     "postcss": "^8.4.38",
@@ -56,15 +48,9 @@
     "react-dom": "^18.2.0",
     "tailwindcss": "^3.4.4",
     "ts-loader": "^9.3.0",
-    "typescript": "^4.7.3",
+    "tsup": "^8.1.0",
+    "typescript": "^5.4.5",
     "webpack": "^5.73.0"
-  },
-  "babel": {
-    "presets": [
-      "@babel/env",
-      "@babel/typescript",
-      "@babel/react"
-    ]
   },
   "dependencies": {
     "@headlessui/react": "^1.6.4",
