@@ -1,6 +1,5 @@
 import React, { forwardRef, Fragment, Ref } from "react";
-import SystemSearch from "@osn/icons/subsquare/SystemSearch";
-import SystemClear from "@osn/icons/subsquare/SystemClear";
+import { SystemSearch, SystemClear } from "@osn/icons/subsquare";
 import { useIsDark } from "../lib/utils";
 import clsx from "clsx";
 
