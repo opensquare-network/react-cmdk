@@ -33,6 +33,7 @@
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
     "@babel/preset-typescript": "^7.17.12",
+    "@osn/icons": "^1.107.0",
     "@storybook/addon-actions": "^6.5.16",
     "@storybook/addon-essentials": "^6.5.16",
     "@storybook/addon-links": "^6.5.16",
@@ -67,10 +68,10 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.6.4",
-    "@heroicons/react": "^2.0.13",
     "clsx": "^1.2.1"
   },
   "peerDependencies": {
+    "@osn/icons": "^1.107.0",
     "react": "^16.x || ^17.x || ^18.x",
     "react-dom": "^16.x || ^17.x || ^18.x"
   },
